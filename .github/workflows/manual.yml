@@ -1,0 +1,22 @@
+name: nightly
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to release'
+        required: true
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Log into registry
+        run: echo "${{ secrets.DOCKERHUB_ACCESS_TOKEN }}" | docker login -u stevapple --password-stdin
+      - name: Build and release
+        run: |
+          cd ${{ github.event.inputs.version }}
+          docker build -t stevapple/scf-swift:${{ github.event.inputs.version }} .
+          docker push stevapple/scf-swift:${{ github.event.inputs.version }}
