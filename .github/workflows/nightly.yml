@@ -15,5 +15,5 @@ jobs:
       - name: Build and release nightly
         run: |
           cd nightly
-          docker build -t stevapple/scf-swift:nightly .
-          docker push stevapple/scf-swift:nightly
+          docker build -t stevapple/swift-scf:nightly .
+          docker push stevapple/swift-scf:nightly

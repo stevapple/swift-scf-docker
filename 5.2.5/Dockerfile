@@ -1,4 +1,5 @@
 FROM centos:7.6.1810
+LABEL Name="swift-scf"
 LABEL maintainer="YR Chen <stevapple@icloud.com>"
 LABEL description="Docker Container for Swift with Tencent SCF Custom Runtime"
 

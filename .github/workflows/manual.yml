@@ -18,5 +18,5 @@ jobs:
       - name: Build and release
         run: |
           cd ${{ github.event.inputs.version }}
-          docker build -t stevapple/scf-swift:${{ github.event.inputs.version }} .
-          docker push stevapple/scf-swift:${{ github.event.inputs.version }}
+          docker build -t stevapple/swift-scf:${{ github.event.inputs.version }} .
+          docker push stevapple/swift-scf:${{ github.event.inputs.version }}
