@@ -3,21 +3,30 @@ LABEL Name="swift-scf"
 LABEL maintainer="YR Chen <stevapple@icloud.com>"
 LABEL description="Docker Container for Swift with Tencent SCF Custom Runtime"
 
-RUN yum -y update && yum install shadow-utils.x86_64 -y \
-  binutils \
-  gcc \
-  git \
-  glibc-static \
-  libbsd-devel \
-  libedit \
-  libedit-devel \
-  libicu-devel \
-  libstdc++-static \
-  pkg-config \
-  python2 \
-  sqlite \
-  zlib-devel \
-  zip
+RUN sed -e "/mirrorlist/d" \
+    -e "s/#baseurl/baseurl/g" \
+    -e "s/mirror.centos.org/vault.centos.org/g" \
+    -e "s/\$releasever/7.6.1810/g" \
+    -i /etc/yum.repos.d/* && yum clean all -y
+
+RUN yum install https://repo.ius.io/ius-release-el7.rpm -y \
+    && yum -y update \
+    && yum install shadow-utils -y \
+      binutils \
+      gcc \
+      git224 \
+      glibc-static \
+      libbsd-devel \
+      libedit \
+      libedit-devel \
+      libicu-devel \
+      libstdc++-static \
+      pkg-config \
+      python2 \
+      sqlite \
+      zlib-devel \
+      zip \
+    && yum clean all -y
 
 RUN sed -i -e 's/\*__block/\*__libc_block/g' /usr/include/unistd.h
 
