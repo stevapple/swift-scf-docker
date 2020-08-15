@@ -10,7 +10,7 @@ RUN sed -e "/mirrorlist/d" \
     -i /etc/yum.repos.d/* && yum clean all -y
 
 RUN yum install https://repo.ius.io/ius-release-el7.rpm -y \
-    && yum -y update \
+    && yum update -y \
     && yum install shadow-utils -y \
       binutils \
       gcc \
