@@ -1,8 +1,8 @@
 # swift-scf-docker
 
-Forked from [apple/swift-docker](https://github.com/apple/swift-docker), modified for [Tencent Cloud SCF](https://cloud.tencent.com/product/scf).
+Forked from [apple/swift-docker](https://github.com/apple/swift-docker), modified for [Tencent Cloud SCF](https://intl.cloud.tencent.com/product/scf).
 
-### Docker images for [Swift](https://swift.org) on [SCF Custom Runtime](https://cloud.tencent.com/document/product/583/47274).
+### Docker images for [Swift](https://swift.org) on [SCF Custom Runtime](https://intl.cloud.tencent.com/document/product/583/38129).
 
 #### You can find the Docker Hub repo here: [https://hub.docker.com/r/stevapple/swift-scf](https://hub.docker.com/r/stevapple/swift-scf)
 
