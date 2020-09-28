@@ -1,13 +1,6 @@
-FROM centos:7.6.1810
+FROM centos:7.2.1511
 LABEL maintainer="YR Chen <stevapple@icloud.com>"
 LABEL description="Docker Container for Swift with Tencent SCF Custom Runtime"
-
-RUN sed -e "/mirrorlist/d" \
-    -e "s/#baseurl/baseurl/g" \
-    -e "s/mirror.centos.org/vault.centos.org/g" \
-    -e "s/\$releasever/7.6.1810/g" \
-    -i /etc/yum.repos.d/*.repo \
-    && yum clean all -y
 
 RUN yum install https://repo.ius.io/ius-release-el7.rpm -y \
     && yum install shadow-utils -y \
