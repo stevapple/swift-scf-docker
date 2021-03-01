@@ -14,7 +14,7 @@ RUN yum install https://repo.ius.io/ius-release-el7.rpm -y \
       libicu-devel \
       libstdc++-static \
       pkg-config \
-      python2 \
+      python3 \
       sqlite \
       zlib-devel \
       zip \

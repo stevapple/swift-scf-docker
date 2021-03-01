@@ -31,7 +31,7 @@ RUN sed -i -e 's/\*__block/\*__libc_block/g' /usr/include/unistd.h
 ARG SWIFT_SIGNING_KEY=8A7495662C3CD4AE18D95637FAF6989E1BC16FEA
 ARG SWIFT_PLATFORM=centos
 ARG OS_MAJOR_VER=7
-ARG SWIFT_WEBROOT=https://swift.org/builds/development
+ARG SWIFT_WEBROOT=https://swift.org/builds/swift-5.4-branch
 
 ENV SWIFT_SIGNING_KEY=$SWIFT_SIGNING_KEY \
     SWIFT_PLATFORM=$SWIFT_PLATFORM \
@@ -65,7 +65,7 @@ RUN echo '[ ! -z "$TERM" -a -r /etc/motd ] && cat /etc/motd' \
     >> /etc/bashrc; \
     echo -e " ################################################################\n" \
     "#\t\t\t\t\t\t\t\t#\n" \
-    "# Swift Nightly Docker Image for SCF\t\t\t\t#\n" \
+    "# Swift 5.4 Nightly Docker Image for SCF\t\t\t\t#\n" \
     "# Tag: $(cat .swift_tag)\t\t\t#\n" \
     "#\t\t\t\t\t\t\t\t#\n"  \
     "################################################################\n" > /etc/motd
