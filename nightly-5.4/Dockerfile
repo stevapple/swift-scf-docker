@@ -9,10 +9,11 @@ RUN yum install https://repo.ius.io/ius-release-el7.rpm -y \
       git224 \
       glibc-static \
       libbsd-devel \
-      libedit \
+      libcurl-devel \
       libedit-devel \
       libicu-devel \
       libstdc++-static \
+      libxml2-devel \
       pkg-config \
       python3 \
       sqlite \
