@@ -7,6 +7,17 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        version:
+          - nightly
+          - nightly-5.5
     steps:
-      - name: Trigger Autobuild
-        run: curl -XPOST ${{ secrets.DOCKERHUB_TRIGGER_ENDPOINT }}
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Log into registry
+        run: echo "${{ secrets.DOCKERHUB_ACCESS_TOKEN }}" | docker login -u stevapple --password-stdin
+      - name: Build image
+        run: docker build -t stevapple/swift-scf:${{ matrix.version }} ${{ matrix.version }}
+      - name: Release
+        run: docker push stevapple/swift-scf:${{ matrix.version }}
