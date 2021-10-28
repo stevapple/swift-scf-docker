@@ -6,6 +6,9 @@ on:
       version:
         description: 'Version to release (5.x)'
         required: true
+      minor:
+        description: 'The corresponding minor release'
+        required: false
 
 jobs:
   publish:
@@ -21,3 +24,8 @@ jobs:
         run: docker build -t stevapple/swift-scf:${{ github.event.inputs.version }} .
       - name: Release
         run: docker push stevapple/swift-scf:${{ github.event.inputs.version }}
+      - name: Update minor version
+        if: ${{ startsWith(github.event.inputs.version, github.event.inputs.minor) }}
+        run: |
+          docker build -t stevapple/swift-scf:${{ github.event.inputs.minor }} .
+          docker push stevapple/swift-scf:${{ github.event.inputs.minor }}
