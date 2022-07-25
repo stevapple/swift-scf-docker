@@ -7,11 +7,13 @@ RUN yum install centos-release-scl-rh -y \
 
 RUN yum install shadow-utils -y \
       binutils \
+      gcc \
       glibc-static \
       libbsd-devel \
       libcurl-devel \
       libedit-devel \
       libicu-devel \
+      libstdc++-static \
       libxml2-devel \
       pkg-config \
       python3 \
@@ -20,7 +22,8 @@ RUN yum install shadow-utils -y \
       zip \
     && yum clean all -y
 
-RUN yum install rh-git227-git devtoolset-11-gcc-c++ -y \
+RUN yum install rh-git227-git -y \
+    && ln -s /opt/rh/rh-git227/root/bin/git /usr/bin/git \
     && yum clean all -y
 
 RUN sed -i -e 's/\*__block/\*__libc_block/g' /usr/include/unistd.h
@@ -58,7 +61,3 @@ RUN set -e; \
 
 # Print Installed Swift Version
 RUN swift --version
-
-# Activate SCl installation
-COPY --chown=root:root swift-scf.sh /etc/profile.d/
-ENV ENV=/etc/profile.d/swift-scf.sh

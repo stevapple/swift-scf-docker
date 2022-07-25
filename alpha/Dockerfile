@@ -4,8 +4,9 @@ LABEL description="Docker Container for Swift with Tencent SCF Custom Runtime (A
 
 # Install newer git and gcc
 RUN yum install epel-release centos-release-scl-rh -y \
-    && yum install rh-git227-git devtoolset-11-gcc-c++ -y \
+    && yum install rh-git227-git -y \
     && yum clean all -y
+RUN ln -s /opt/rh/rh-git227/root/bin/git /usr/bin/git
 
 # Install swiftlang
 RUN curl https://download.swift.org/experimental-use-only/repo/centos/releases/7/swiftlang.repo > /etc/yum.repos.d/swiftlang.repo \
@@ -14,7 +15,3 @@ RUN curl https://download.swift.org/experimental-use-only/repo/centos/releases/7
 
 # Print Installed Swift Version
 RUN swift --version
-
-# Activate SCl installation
-COPY --chown=root:root swift-scf.sh /etc/profile.d/
-ENV ENV=/etc/profile.d/swift-scf.sh
