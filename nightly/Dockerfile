@@ -73,5 +73,6 @@ RUN echo '[ ! -z "$TERM" -a -r /etc/motd ] && cat /etc/motd' \
     "#\t\t\t\t\t\t\t\t#\n"  \
     "################################################################\n" > /etc/motd
 
-# Activate Git and GCC installation
-SHELL [ "/usr/bin/scl", "enable", "rh-git227", "devtoolset-11" ]
+# Activate SCl installation
+COPY --chown=root:root swift-scf.sh /etc/profile.d/
+ENV ENV=/etc/profile.d/swift-scf.sh

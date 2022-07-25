@@ -59,5 +59,6 @@ RUN set -e; \
 # Print Installed Swift Version
 RUN swift --version
 
-# Activate Git and GCC installation
-SHELL [ "/usr/bin/scl", "enable", "rh-git227", "devtoolset-11" ]
+# Activate SCl installation
+COPY --chown=root:root swift-scf.sh /etc/profile.d/
+ENV ENV=/etc/profile.d/swift-scf.sh
