@@ -23,8 +23,10 @@ RUN yum install shadow-utils -y \
     && yum clean all -y
 
 RUN yum install rh-git227-git -y \
-    && ln -s /opt/rh/rh-git227/root/bin/git /usr/bin/git \
     && yum clean all -y
+
+RUN echo "source /opt/rh/rh-git227/enable" >> /etc/profile.d/sh.local
+ENV ENV=/etc/profile.d/sh.local
 
 RUN sed -i -e 's/\*__block/\*__libc_block/g' /usr/include/unistd.h
 

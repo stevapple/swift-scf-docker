@@ -23,6 +23,10 @@ RUN yum install shadow-utils -y \
 RUN yum install rh-git227-git devtoolset-11-gcc-c++ -y \
     && yum clean all -y
 
+RUN echo "source /opt/rh/devtoolset-11/enable" >> /etc/profile.d/sh.local \
+    && echo "source /opt/rh/rh-git227/enable" >> /etc/profile.d/sh.local
+ENV ENV=/etc/profile.d/sh.local
+
 RUN sed -i -e 's/\*__block/\*__libc_block/g' /usr/include/unistd.h
 
 # Everything up to here should cache nicely between Swift versions, assuming dev dependencies change little
@@ -73,7 +77,3 @@ RUN echo '[ ! -z "$TERM" -a -r /etc/motd ] && cat /etc/motd' \
     "# Tag: $(cat .swift_tag)\t\t\t#\n" \
     "#\t\t\t\t\t\t\t\t#\n"  \
     "################################################################\n" > /etc/motd
-
-# Activate SCl installation
-COPY --chown=root:root swift-scf.sh /etc/profile.d/
-ENV ENV=/etc/profile.d/swift-scf.sh
