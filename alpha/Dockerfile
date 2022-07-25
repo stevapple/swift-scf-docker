@@ -3,7 +3,7 @@ LABEL maintainer="YR Chen <stevapple@icloud.com>"
 LABEL description="Docker Container for Swift with Tencent SCF Custom Runtime (Alpha)"
 
 # Install newer git and gcc
-RUN yum install centos-release-scl-rh -y \
+RUN yum install epel-release centos-release-scl-rh -y \
     && yum install rh-git227-git devtoolset-11-gcc-c++ -y \
     && yum clean all -y
 
@@ -14,3 +14,6 @@ RUN curl https://download.swift.org/experimental-use-only/repo/centos/releases/7
 
 # Print Installed Swift Version
 RUN swift --version
+
+# Activate Git and GCC installation
+SHELL [ "/usr/bin/scl", "enable", "rh-git227", "devtoolset-11" ]
