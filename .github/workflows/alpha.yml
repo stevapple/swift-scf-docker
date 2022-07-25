@@ -1,11 +1,11 @@
-name: Beta release
+name: Alpha release
 
 on:
   push:
     branches:
       - main
     paths:
-      - 'beta/**'
+      - 'alpha/**'
 
 jobs:
   publish:
@@ -16,6 +16,6 @@ jobs:
       - name: Log into registry
         run: echo "${{ secrets.DOCKERHUB_ACCESS_TOKEN }}" | docker login -u stevapple --password-stdin
       - name: Build image
-        run: docker build -t stevapple/swift-scf:beta beta
+        run: docker build -t stevapple/swift-scf:alpha alpha
       - name: Release
-        run: docker push stevapple/swift-scf:beta
+        run: docker push stevapple/swift-scf:alpha

@@ -1,6 +1,6 @@
 FROM centos:7.6.1810
 LABEL maintainer="YR Chen <stevapple@icloud.com>"
-LABEL description="Docker Container for Swift with Tencent SCF Custom Runtime (Beta)"
+LABEL description="Docker Container for Swift with Tencent SCF Custom Runtime (Alpha)"
 
 # Install newer git and gcc
 RUN yum install centos-release-scl-rh -y \
