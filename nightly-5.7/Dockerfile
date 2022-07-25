@@ -1,4 +1,4 @@
-FROM centos:7.7.1908
+FROM centos:7.6.1810
 LABEL maintainer="YR Chen <stevapple@icloud.com>"
 LABEL description="Docker Container for Swift with Tencent SCF Custom Runtime"
 
@@ -32,7 +32,7 @@ RUN sed -i -e 's/\*__block/\*__libc_block/g' /usr/include/unistd.h
 ARG SWIFT_SIGNING_KEY=8A7495662C3CD4AE18D95637FAF6989E1BC16FEA
 ARG SWIFT_PLATFORM=centos
 ARG OS_MAJOR_VER=7
-ARG SWIFT_WEBROOT=https://download.swift.org/swift-5.5-branch
+ARG SWIFT_WEBROOT=https://download.swift.org/swift-5.7-branch
 
 ENV SWIFT_SIGNING_KEY=$SWIFT_SIGNING_KEY \
     SWIFT_PLATFORM=$SWIFT_PLATFORM \
@@ -66,7 +66,7 @@ RUN echo '[ ! -z "$TERM" -a -r /etc/motd ] && cat /etc/motd' \
     >> /etc/bashrc; \
     echo -e " ################################################################\n" \
     "#\t\t\t\t\t\t\t\t#\n" \
-    "# Swift 5.5 Nightly Docker Image for SCF\t\t\t\t#\n" \
+    "# Swift 5.7 Nightly Docker Image for SCF\t\t\t\t#\n" \
     "# Tag: $(cat .swift_tag)\t\t\t#\n" \
     "#\t\t\t\t\t\t\t\t#\n"  \
     "################################################################\n" > /etc/motd
