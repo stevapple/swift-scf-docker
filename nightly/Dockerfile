@@ -2,23 +2,25 @@ FROM centos:7.6.1810
 LABEL maintainer="YR Chen <stevapple@icloud.com>"
 LABEL description="Docker Container for Swift with Tencent SCF Custom Runtime"
 
-RUN yum install https://repo.ius.io/ius-release-el7.rpm -y \
-    && yum install shadow-utils -y \
+RUN yum install centos-release-scl-rh -y \
+    && yum clean all -y
+
+RUN yum install shadow-utils -y \
       binutils \
-      gcc \
-      git224 \
       glibc-static \
       libbsd-devel \
       libcurl-devel \
       libedit-devel \
       libicu-devel \
-      libstdc++-static \
       libxml2-devel \
       pkg-config \
       python3 \
       sqlite \
       zlib-devel \
       zip \
+    && yum clean all -y
+
+RUN yum install rh-git227-git devtoolset-11-gcc-c++ -y \
     && yum clean all -y
 
 RUN sed -i -e 's/\*__block/\*__libc_block/g' /usr/include/unistd.h
@@ -70,3 +72,6 @@ RUN echo '[ ! -z "$TERM" -a -r /etc/motd ] && cat /etc/motd' \
     "# Tag: $(cat .swift_tag)\t\t\t#\n" \
     "#\t\t\t\t\t\t\t\t#\n"  \
     "################################################################\n" > /etc/motd
+
+# Activate Git and GCC installation
+SHELL [ "/usr/bin/scl", "enable", "rh-git227", "devtoolset-11" ]
