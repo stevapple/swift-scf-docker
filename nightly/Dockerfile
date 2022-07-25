@@ -35,6 +35,7 @@ ARG SWIFT_SIGNING_KEY=8A7495662C3CD4AE18D95637FAF6989E1BC16FEA
 ARG SWIFT_PLATFORM=centos
 ARG OS_MAJOR_VER=7
 ARG SWIFT_WEBROOT=https://download.swift.org/development
+ARG DEVTOOLSET_ROOT=/opt/rh/devtoolset-11/root
 
 ENV SWIFT_SIGNING_KEY=$SWIFT_SIGNING_KEY \
     SWIFT_PLATFORM=$SWIFT_PLATFORM \
@@ -57,12 +58,12 @@ RUN set -e; \
     && curl -fL https://swift.org/keys/all-keys.asc | gpg --import -  \
     && gpg --batch --verify latest_toolchain.tar.gz.sig latest_toolchain.tar.gz \
     # - Unpack the toolchain, set libs permissions, and clean up.
-    && tar -xzf latest_toolchain.tar.gz --directory / --strip-components=1 \
-    && chmod -R o+r /usr/lib/swift \
+    && tar -xzf latest_toolchain.tar.gz --directory ${DEVTOOLSET_ROOT} --strip-components=1 \
+    && chmod -R o+r ${DEVTOOLSET_ROOT}/usr/lib/swift \
     && rm -rf "$GNUPGHOME" latest_toolchain.tar.gz.sig latest_toolchain.tar.gz
 
 # Print Installed Swift Version
-RUN swift --version
+RUN ${DEVTOOLSET_ROOT}/usr/bin/swift --version
 
 RUN echo '[ ! -z "$TERM" -a -r /etc/motd ] && cat /etc/motd' \
     >> /etc/bashrc; \
