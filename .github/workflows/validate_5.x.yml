@@ -1,0 +1,19 @@
+name: Validate 5.x
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to validate (5.x)'
+        required: true
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Generate Dockerfile
+        run: sed "s/#SWIFT_VERSION#/${{ github.event.inputs.version }}/g" 5.x/Dockerfile > Dockerfile
+      - name: Build image
+        run: docker build .
